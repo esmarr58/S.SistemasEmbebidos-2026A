@@ -3,12 +3,15 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "esp_timer.h"
+#include "esp_task_wdt.h"
 
 #define PIN_LED 12
 #define ALTO 1
 #define BAJO 0
 
 void app_main(void) {
+    esp_task_wdt_deinit();
+
     gpio_reset_pin(PIN_LED);
     gpio_set_direction(PIN_LED, GPIO_MODE_OUTPUT);
 
