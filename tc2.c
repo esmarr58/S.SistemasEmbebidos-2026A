@@ -12,19 +12,64 @@
 #define SEG_F    7
 #define SEG_G    8
 
-// Máscaras para dígitos 0-9 (cátodo común)
-const uint8_t digitos[10] = {
-    0x3F, // 0: 00111111 - segmentos: a,b,c,d,e,f
-    0x06, // 1: 00000110 - segmentos: b,c
-    0x5B, // 2: 01011011 - segmentos: a,b,d,e,g
-    0x4F, // 3: 01001111 - segmentos: a,b,c,d,g
-    0x66, // 4: 01100110 - segmentos: b,c,f,g
-    0x6D, // 5: 01101101 - segmentos: a,c,d,f,g
-    0x7D, // 6: 01111101 - segmentos: a,c,d,e,f,g
-    0x07, // 7: 00000111 - segmentos: a,b,c
-    0x7F, // 8: 01111111 - todos los segmentos
-    0x6F  // 9: 01101111 - segmentos: a,b,c,d,f,g
+// =======================================================
+// DISPLAY DE 7 SEGMENTOS — TABLAS DE DECODIFICACIÓN
+// Convención de bits:
+// bit0 = a, bit1 = b, bit2 = c, bit3 = d,
+// bit4 = e, bit5 = f, bit6 = g
+// =======================================================
+
+
+/* ======================================================
+ * TABLA PARA DISPLAY DE CÁTODO COMÚN (CC)
+ * - El pin común va a GND
+ * - 1 = segmento ENCENDIDO
+ * ====================================================== */
+const uint8_t digitos_cc[10] = {
+    0x3F, // 0: 00111111 → a b c d e f
+    0x06, // 1: 00000110 → b c
+    0x5B, // 2: 01011011 → a b d e g
+    0x4F, // 3: 01001111 → a b c d g
+    0x66, // 4: 01100110 → b c f g
+    0x6D, // 5: 01101101 → a c d f g
+    0x7D, // 6: 01111101 → a c d e f g
+    0x07, // 7: 00000111 → a b c
+    0x7F, // 8: 01111111 → a b c d e f g
+    0x6F  // 9: 01101111 → a b c d f g
 };
+
+
+/* ======================================================
+ * TABLA PARA DISPLAY DE ÁNODO COMÚN (CA)
+ * - El pin común va a VCC
+ * - 0 = segmento ENCENDIDO (lógica invertida)
+ * ====================================================== */
+const uint8_t digitos_ca[10] = {
+    0x40, // 0: 1000000 → a b c d e f
+    0x79, // 1: 1111001 → b c
+    0x24, // 2: 0100100 → a b d e g
+    0x30, // 3: 0110000 → a b c d g
+    0x19, // 4: 0011001 → b c f g
+    0x12, // 5: 0010010 → a c d f g
+    0x02, // 6: 0000010 → a c d e f g
+    0x78, // 7: 1111000 → a b c
+    0x00, // 8: 0000000 → a b c d e f g
+    0x10  // 9: 0010000 → a b c d f g
+};
+
+
+/* ======================================================
+ * 👉 INSTRUCCIÓN PARA EL ALUMNO
+ * ======================================================
+ * SOLO CAMBIA ESTA LÍNEA SEGÚN TU DISPLAY
+ * NO CAMBIES EL RESTO DEL PROGRAMA
+ */
+
+// Para display de CÁTODO COMÚN:
+// const uint8_t *digitos = digitos_cc;
+
+// Para display de ÁNODO COMÚN:
+const uint8_t *digitos = digitos_ca;
 
 // Función para inicializar todos los pines del display
 void inicializar_display() {
