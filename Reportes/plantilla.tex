@@ -1,0 +1,221 @@
+\documentclass[12pt,letterpaper]{report}
+
+% ==================================================
+% IDIOMA Y FORMATO
+% ==================================================
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+
+% ==================================================
+% IMÁGENES Y TABLAS
+% ==================================================
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% ==================================================
+% ENCABEZADO FORMAL
+% ==================================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{CUCEI -- Universidad de Guadalajara}
+\fancyhead[R]{Ciclo 2026A}
+\fancyfoot[C]{\thepage}
+
+% ==================================================
+\begin{document}
+
+% ==================================================
+% PORTADA
+% ==================================================
+\begin{titlepage}
+\centering
+
+\includegraphics[width=4cm]{Reportes/Imagenes/udg.png}\\[1cm]
+
+{\large \textbf{UNIVERSIDAD DE GUADALAJARA}}\\
+{\large Centro Universitario de Ciencias Exactas e Ingenierías (CUCEI)}\\
+{\large Departamento de Electrónica}\\[1.2cm]
+
+{\Large \textbf{Seminario de Programación de Sistemas Embebidos}}\\
+{\large Ciclo Escolar 2026A}\\[1.5cm]
+
+{\Huge \textbf{Reporte Técnico de Práctica \#1}}\\
+{\Large GPIO: Salidas Digitales y Display de 7 Segmentos}\\[1.5cm]
+
+\begin{tabular}{rl}
+\textbf{Alumno:} & \rule{9cm}{0.4pt} \\
+\textbf{Código:} & \rule{9cm}{0.4pt} \\
+\textbf{Carrera:} & \rule{9cm}{0.4pt} \\
+\textbf{Grupo:} & \rule{9cm}{0.4pt} \\
+\textbf{Profesor:} & Dr. Rubén Estrada Marmolejo \\
+\textbf{Fecha de entrega:} & \rule{9cm}{0.4pt} \\
+\end{tabular}
+
+\vfill
+Guadalajara, Jalisco, México\\
+2026
+
+\end{titlepage}
+
+% ==================================================
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+
+\textbf{Qué debe incluir:}
+Contexto, objetivo, modificación realizada, resultado y conclusión general.
+Extensión: 150–200 palabras.
+Redactar en tercera persona.
+
+\textbf{Ejemplo incorrecto:}
+\textcolor{red}{“En esta práctica hicimos el display y al final sí funcionó.”}
+
+\textbf{Ejemplo correcto:}
+\textcolor{blue}{“En la presente práctica se implementó el control de un display de 7 segmentos mediante salidas GPIO de la ESP32-S3. Se verificó el funcionamiento del código base y posteriormente se modificó la secuencia de salida. El sistema operó de manera estable y sin errores intermitentes.”}
+
+\vspace{4cm}
+
+\textbf{Palabras clave:} GPIO, ESP32-S3, display de 7 segmentos, lógica digital.
+
+\clearpage
+\tableofcontents
+\clearpage
+
+% ==================================================
+\chapter{Introducción}
+
+\textbf{Qué debe incluir:}
+Explicación técnica del contexto.
+No describir lo que hizo el alumno paso a paso.
+
+\textbf{Incorrecto:}
+\textcolor{red}{“Primero conectamos los cables y luego subimos el código.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“Los pines GPIO permiten controlar dispositivos externos mediante señales digitales. El display de 7 segmentos es un dispositivo ampliamente utilizado para representar información numérica en sistemas embebidos.”}
+
+\vspace{4cm}
+
+% ==================================================
+\chapter{Objetivos}
+
+\section{Objetivo general}
+
+Debe redactarse en infinitivo.
+
+\textbf{Incorrecto:}
+\textcolor{red}{“El objetivo es que funcione.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“Implementar y validar el control de un display de 7 segmentos mediante salidas GPIO.”}
+
+\vspace{2cm}
+
+\section{Objetivos específicos}
+
+\begin{itemize}
+    \item Verificar el funcionamiento del código base.
+    \item Modificar únicamente la secuencia de salida.
+    \item Validar el comportamiento en hardware físico.
+\end{itemize}
+
+% ==================================================
+\chapter{Materiales y Metodología}
+
+\section{Materiales utilizados}
+
+Listar únicamente componentes reales utilizados.
+
+\textbf{Incorrecto:}
+\textcolor{red}{“Todo lo del laboratorio.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“ESP32-S3, display de 7 segmentos tipo cátodo común, siete resistencias de 220Ω, protoboard y cables de conexión.”}
+
+\vspace{2cm}
+
+\section{Metodología}
+
+Describir procedimiento técnico ordenado.
+
+\textbf{Incorrecto:}
+\textcolor{red}{“Movimos cosas del código hasta que funcionó.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“Se ejecutó inicialmente el código base sin modificaciones para verificar el conteo del 0 al 9. Posteriormente, se modificó exclusivamente la estructura que define la secuencia de salida.”}
+
+\vspace{4cm}
+
+% ==================================================
+\chapter{Resultados}
+
+\section{Secuencia implementada}
+
+\begin{center}
+\begin{tabular}{cccccccc}
+\toprule
+Paso & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\midrule
+Valor mostrado & & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Validación experimental}
+
+Describir lo observado de manera objetiva.
+
+\textbf{Incorrecto:}
+\textcolor{red}{“Creo que funcionó bien.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“La secuencia implementada se visualizó correctamente en el display. No se observaron reinicios ni fallas intermitentes.”}
+
+\vspace{4cm}
+
+% ==================================================
+\chapter{Discusión}
+
+Analizar dificultades y soluciones técnicas.
+
+\textbf{Incorrecto:}
+\textcolor{red}{“Fue difícil porque no sabía qué hacer.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“Una dificultad relevante fue identificar el tipo de display. Esta situación se resolvió mediante la verificación del comportamiento lógico de los segmentos y la comparación con la hoja de datos.”}
+
+\vspace{4cm}
+
+% ==================================================
+\chapter{Conclusiones}
+
+Responder: ¿Qué se aprendió técnicamente?
+
+\textbf{Incorrecto:}
+\textcolor{red}{“Aprendí mucho.”}
+
+\textbf{Correcto:}
+\textcolor{blue}{“Se comprendió el funcionamiento de las salidas digitales GPIO y la importancia de validar modificaciones de software mediante pruebas experimentales controladas.”}
+
+\vspace{3cm}
+
+% ==================================================
+\chapter{Cuestionario}
+
+Copiar 5 preguntas del banco y responderlas con claridad técnica.
+Cada respuesta debe tener mínimo 2–4 líneas.
+
+\vspace{4cm}
+
+% ==================================================
+\end{document}
